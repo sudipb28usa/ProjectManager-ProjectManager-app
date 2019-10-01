@@ -1,0 +1,66 @@
+<div class="container custom-container">
+    <div class="col-md-12">
+      
+      <h3 class="mb-3 text-center">Update Task</h3>
+
+    
+  
+      <div class="form-group">
+
+          <select  class="custom-select" [(ngModel)]="taskData.parent_ID"  placeholder="Parent"> 
+             <option value="">Choose Parent</option>
+           <option *ngFor="let parentTask of ParentTask" [value]="parentTask.parent_ID">{{parentTask.parent_Task}}  </option> 
+       </select> 
+         </div>
+
+  
+      <div class="form-group">
+
+          <select  class="custom-select" [(ngModel)]="taskData.project_ID"  placeholder="Project"> 
+             <option value="">Choose Project</option>
+           <option *ngFor="let project of Project" [value]="project.project_ID">{{project.project_Name}}  </option> 
+       </select> 
+         </div>
+        
+
+  
+      <div class="form-group">
+        <input type="text" [(ngModel)]="taskData.task_Name" class="form-control" placeholder="Task Name">
+      </div>
+
+
+      <div class="form-group">
+        <input type="date" [(ngModel)]="taskData.start_Date" class="form-control" placeholder="Start Date">
+      </div>
+
+      <div class="form-group">
+        <input type="date" [(ngModel)]="taskData.end_Date" class="form-control" placeholder="End Date">
+      </div>
+
+      
+      <div class="form-group">
+        <input type="text" [(ngModel)]="taskData.status" class="form-control" placeholder="Status">
+      </div>
+
+
+      <div class="form-group">
+
+          <select  class="custom-select" [(ngModel)]="taskData.user_ID"  placeholder="User"> 
+             <option value="">Assign User</option>
+           <option *ngFor="let user of User" [value]="user.user_ID">{{user.first_Name}} &nbsp;{{user.last_Name}}</option> 
+       </select> 
+         </div>
+
+     
+      <div class="form-group">
+      <mat-slider  thumbLabel  tickInterval="1000"  min="1" max="10" [(ngModel)]="taskData.priority" class="form-control" placeholder="Priority"></mat-slider>
+    </div>
+ 
+  
+      <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" (click)="updateTask()">Update Task Data</button>
+      </div>
+      
+    </div>
+  </div>
+

@@ -1,0 +1,39 @@
+<div class="container custom-container-2">
+
+    <!-- Show it when there is no ParentTask -->
+    <div class="no-data text-center" *ngIf="ParentTask.length == 0">
+      <p>There is no ParentTask added yet!</p>
+      <button class="btn btn-outline-primary" routerLink="/create-parent-task">Add Parent Task</button>
+    </div>
+  
+    <!-- ParentTask list table, it hides when there is no ParentTask -->
+    <div *ngIf="ParentTask.length !== 0">
+      <h3 class="mb-3 text-center">Parent Task List</h3>
+  
+      <div class="col-md-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Parent ID</th>
+              <th scope="col">Parent Task</th>
+            
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let parentTask of ParentTask">
+              <td>{{parentTask.parent_ID}}</td>
+              <td>{{parentTask.parent_Task}}</td>
+
+              <td>
+                <button  type="button" class="btn btn-primary btn-sm" routerLink="/update-parent-task/{{parentTask.parent_ID}}">Edit</button>
+                <button  type="button" class="btn btn-danger btn-sm" (click)="deleteParentTask(parentTask.parent_ID)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  
+  </div>

@@ -1,0 +1,140 @@
+<div class="container custom-container-2">
+
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-inline md-form mr-auto mb-4">
+  
+              <input type="text" [(ngModel)]="userData.first_Name" class="form-control mr-sm-2" placeholder="First Name"
+                aria-label="First Name">
+  
+              <button mdbBtn size="sm" color="warning" outline="true" rounded="true" class="my-0 waves-light"
+                mdbWavesEffect (click)="loadUserByFirstName()">Search</button>
+            </div>
+          </div>
+          <!--
+          <div class="col-md-6 text-right">Sort: <button type="button" class="btn btn-xs">First Name</button>
+            <button type="button" class="btn btn-xs">Last Name</button><button type="button"
+              class="btn btn-xs">Id</button></div>-->
+        </div>
+      </div>
+
+  <!-- Show it when there is no User -->
+  <div class="no-data text-center" *ngIf="User.length == 0">
+    <p>There is no User added yet!</p>
+    <button class="btn btn-outline-primary" routerLink="/create-user">Add User</button>
+  </div>
+
+  <!-- User list table, it hides when there is no User -->
+
+
+  <div *ngIf="User.length !== 0">
+    <h3 class="mb-3 text-center">User List</h3>
+
+
+
+
+    
+
+    <div class="col-md-12">
+      <!-- <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">Task ID</th>
+            <th scope="col">Project ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Employee ID</th>
+
+
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of User">
+            <td>{{user.user_ID}}</td>
+            <td>{{user.task_ID}}</td>
+            <td>{{user.project_ID}}</td>
+            <td>{{user.first_Name}}</td>
+            <td>{{ user.last_Name}}</td>
+            <td>{{ user.employee_ID}}</td>
+
+
+
+            <td>
+              <button type="button" class="btn btn-primary btn-sm"
+                routerLink="/update-user/{{user.user_ID}}">Edit</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="deleteUser(user.user_ID)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>-->
+
+        
+
+    <table mat-table [dataSource]="User" matSort class="mat-elevation-z8" >
+      <ng-container matColumnDef="user_ID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> User ID </th>
+        <td mat-cell *matCellDef="let User"> {{User.user_ID}} </td>
+      </ng-container>
+
+  
+      <ng-container matColumnDef="first_Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+        <td mat-cell *matCellDef="let User"> {{User.first_Name}} </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="last_Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name  </th>
+        <td mat-cell *matCellDef="let User"> {{User.last_Name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="employee_ID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee ID </th>
+        <td mat-cell *matCellDef="let User"> {{User.employee_ID}} </td>
+      </ng-container>
+
+        
+   
+  
+      <ng-container matColumnDef="task">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Task</th>
+        <td mat-cell *matCellDef="let User"> {{User.task_Name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="project">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Project</th>
+        <td mat-cell *matCellDef="let User"> {{User.project_Name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+        <td mat-cell *matCellDef="let User">  <button type="button" class="btn btn-primary btn-sm"
+          routerLink="/update-user/{{User.user_ID}}">Edit</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="deleteUser(User.user_ID)">Delete</button> </td>
+      </ng-container>
+  
+   
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <!-- Angular 8 pagination -->
+    <mat-paginator [pageSizeOptions]="[2, 5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+
+    </div>
+
+
+  
+
+  </div>
+
+
+
+
+</div>
+ 

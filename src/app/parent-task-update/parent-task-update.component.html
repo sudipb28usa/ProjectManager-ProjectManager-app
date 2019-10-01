@@ -1,0 +1,20 @@
+<div class="container custom-container">
+    <div class="col-md-12">
+      
+      <h3 class="mb-3 text-center">Update Parent Task</h3>
+  
+      <div class="form-group">
+        <input type="text" [(ngModel)]="parentTaskData.parent_ID" class="form-control" placeholder="parent_ID">
+      </div>
+  
+      <div class="form-group">
+        <input type="text" [(ngModel)]="parentTaskData.parent_Task" class="form-control" placeholder="parent_Task">
+      </div>
+ 
+  
+      <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" (click)="updateParentTask()">Update Parent Task Data</button>
+      </div>
+      
+    </div>
+  </div>

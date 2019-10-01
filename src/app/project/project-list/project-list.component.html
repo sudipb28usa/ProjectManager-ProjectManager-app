@@ -1,0 +1,129 @@
+<div class="container custom-container-2">
+
+
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-inline md-form mr-auto mb-4">
+  
+              <input type="text" [(ngModel)]="projectData.project_Name" class="form-control mr-sm-2" placeholder="Project Name"
+                aria-label="Project Name">
+  
+              <button mdbBtn size="sm" color="warning" outline="true" rounded="true" class="my-0 waves-light"
+                mdbWavesEffect (click)="loadProjectByName()">Search</button>
+            </div>
+          </div>
+ 
+        </div>
+      </div>
+
+    <!-- Show it when there is no Project -->
+    <div class="no-data text-center" *ngIf="Project.length == 0">
+      <p>There is no Project added yet!</p>
+      <button class="btn btn-outline-primary" routerLink="/create-project">Add Project</button>
+    </div>
+  
+    <!-- Project list table, it hides when there is no Project -->
+    <div *ngIf="Project.length !== 0">
+      <h3 class="mb-3 text-center">Project List</h3>
+  
+      <div class="col-md-12">
+       <!-- <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Project ID</th>
+              <th scope="col">Project Name</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+              <th scope="col">Priority</th>
+              <th scope="col">Manager</th>
+            
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let project of Project">
+              <td>{{project.project_ID}}</td>
+              <td>{{project.project_Name}}</td>
+              <td>{{project.start_Date}}</td>
+              <td>{{ project.end_Date}}</td>
+              <td>{{project.priority}}</td>
+              <td>{{project.userManager_Name}}</td>
+
+
+              <td>
+                <button  type="button" class="btn btn-primary btn-sm" routerLink="/update-project/{{project.project_ID}}">Edit</button>
+                <button  type="button" class="btn btn-danger btn-sm" (click)="deleteProject(project.project_ID)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>-->
+
+        <!--['project_Name', 'no_Task', 'priority', 'start_Date', 'end_Date', 'status','Action'];-->
+
+        <table mat-table [dataSource]="Project" matSort class="mat-elevation-z8" >
+
+            <ng-container matColumnDef="project_Name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Project </th>
+              <td mat-cell *matCellDef="let Project"> {{Project.project_Name}} </td>
+            </ng-container>
+      
+       
+            <ng-container matColumnDef="no_Task">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> No# Task </th>
+              <td mat-cell *matCellDef="let Project"> {{Project.noOfTask}}</td>
+            </ng-container>
+    
+                      
+         
+        
+            <ng-container matColumnDef="priority">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Priority</th>
+                <td mat-cell *matCellDef="let Project"> {{Project.priority}} </td>
+              </ng-container>
+        
+        
+            <ng-container matColumnDef="start_Date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date  </th>
+              <td mat-cell *matCellDef="let Project"> {{ Project.start_Date}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="end_Date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Etart Date  </th>
+              <td mat-cell *matCellDef="let Project"> {{Project.end_Date}} </td>
+            </ng-container>
+      
+    
+        
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+              <td mat-cell *matCellDef="let Project"> {{Project.status}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="Action">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+              <td mat-cell *matCellDef="let Project"> 
+            
+                  <button  type="button" class="btn btn-primary btn-sm" routerLink="/update-project/{{Project.project_ID}}">Edit</button>
+                  <button  type="button" class="btn btn-danger btn-sm" (click)="deleteProject(Project.project_ID)">Delete</button>    
+            
+            
+            </td>
+            </ng-container>
+        
+         
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        
+          <!-- Angular 8 pagination -->
+          <mat-paginator [pageSizeOptions]="[2, 5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+
+
+      </div>
+  
+    </div>
+  
+  </div>

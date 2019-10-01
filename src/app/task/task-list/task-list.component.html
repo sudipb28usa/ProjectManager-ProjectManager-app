@@ -1,0 +1,131 @@
+<div class="container custom-container-2">
+
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-inline md-form mr-auto mb-4">
+  
+              <input type="text" [(ngModel)]="taskData.project_Name" class="form-control mr-sm-2" placeholder="Project Name"
+                aria-label="Project Name">
+  
+              <button mdbBtn size="sm" color="warning" outline="true" rounded="true" class="my-0 waves-light"
+                mdbWavesEffect (click)="loadTaskByProject()">Search</button>
+            </div>
+          </div>
+ 
+        </div>
+      </div>
+
+
+
+  <!-- Show it when there is no Task -->
+  <div class="no-data text-center" *ngIf="Task.length == 0">
+    <p>There is no Task added yet!</p>
+    <button class="btn btn-outline-primary" routerLink="/create-task">Add Task</button>
+  </div>
+
+  <!-- Task list table, it hides when there is no Task -->
+  <div *ngIf="Task.length !== 0">
+    <h3 class="mb-3 text-center">Task List</h3>
+
+    <div class="col-md-12">
+      <!-- 
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Task ID</th>
+            <th scope="col">Task Name</th>
+            <th scope="col">Parent</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Status</th>         
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of Task">
+            <td>{{task.task_ID}}</td>
+            <td>{{task.task_Name}}</td>
+            <td>{{task.parent_TaskName}}</td>
+            <td>{{ task.start_Date}}</td>
+            <td>{{ task.end_Date}}</td>
+            <td>{{ task.priority}}</td>
+            <td>{{ task.status}}</td>
+            <td>
+              <button  type="button" class="btn btn-primary btn-sm" routerLink="/update-task/{{task.task_ID}}">Edit</button>
+              <button  type="button" class="btn btn-danger btn-sm" (click)="deleteTask(task.task_ID)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>-->
+
+
+
+
+<!--['task_Name', 'parent', 'start_Date', 'end_Date', 'status', 'priority','Action'];-->
+
+      
+    <table mat-table [dataSource]="Task" matSort class="mat-elevation-z8" >
+        <ng-container matColumnDef="task_Name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Task </th>
+          <td mat-cell *matCellDef="let Task"> {{Task.task_Name}} </td>
+        </ng-container>
+  
+   
+        <ng-container matColumnDef="parent">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Parent </th>
+          <td mat-cell *matCellDef="let Task"> {{Task.parent_TaskName}} </td>
+        </ng-container>
+
+                  
+     
+    
+        <ng-container matColumnDef="priority">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Priority</th>
+            <td mat-cell *matCellDef="let Task"> {{Task.priority}} </td>
+          </ng-container>
+    
+    
+        <ng-container matColumnDef="start_Date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date  </th>
+          <td mat-cell *matCellDef="let Task"> {{ Task.start_Date}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="end_Date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Etart Date  </th>
+          <td mat-cell *matCellDef="let Task"> {{Task.end_Date}} </td>
+        </ng-container>
+  
+
+    
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+          <td mat-cell *matCellDef="let Task"> {{Task.status}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+          <td mat-cell *matCellDef="let Task"> 
+        
+          <button  type="button" class="btn btn-primary btn-sm" routerLink="/update-task/{{Task.task_ID}}">Edit</button> &nbsp;&nbsp;
+          <button  type="button" class="btn btn-danger btn-sm" (click)="markTaskComplete(Task.task_ID)">End Task</button>   &nbsp;   &nbsp;
+          <button  type="button" class="btn btn-danger btn-sm" (click)="deleteTask(Task.task_ID)">Delete</button>      
+        
+        
+        </td>
+        </ng-container>
+    
+     
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <!-- Angular 8 pagination -->
+      <mat-paginator [pageSizeOptions]="[2, 5, 10, 15]" showFirstLastButtons></mat-paginator>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,46 @@
+<div class="container custom-container">
+    <div class="col-md-12">
+      
+      <h3 class="mb-3 text-center">Update Project</h3>
+  
+      <div class="form-group">
+        <input type="text" [(ngModel)]="projectData.project_ID" class="form-control" placeholder="Project ID" readonly>
+      </div>
+  
+      <div class="form-group">
+        <input type="text" [(ngModel)]="projectData.project_Name" class="form-control" placeholder="Project Name">
+      </div>
+
+
+      <div class="form-group">
+        <input type="date" [(ngModel)]="projectData.start_Date" class="form-control" placeholder="Start Date">
+      </div>
+
+      <div class="form-group">
+        <input type="date" [(ngModel)]="projectData.end_Date" class="form-control" placeholder="End Date">
+      </div>
+
+ 
+      <div class="form-group">
+
+          <select  class="custom-select" name="userManger" [(ngModel)]="projectData.userManager_ID"> 
+             <option value="">Choose Manager</option>
+           <option *ngFor="let user of User" [value]="user.user_ID">{{user.first_Name}} &nbsp;{{user.last_Name}}</option> 
+       </select> 
+         </div>
+
+     
+      <div class="form-group">
+      <mat-slider  thumbLabel  tickInterval="1000"  min="1" max="10" [(ngModel)]="projectData.priority" class="form-control" placeholder="Priority"></mat-slider>
+    </div>
+
+
+ 
+  
+      <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" (click)="updateProject()">Update Project Data</button>
+      </div>
+      
+    </div>
+  </div>
+
